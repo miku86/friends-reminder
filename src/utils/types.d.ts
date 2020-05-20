@@ -1,4 +1,5 @@
 export interface Friend {
+  docId: string;
   friendId: string;
   friendName: string;
   lastTimeContacted: number;

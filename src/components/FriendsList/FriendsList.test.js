@@ -38,6 +38,6 @@ describe("FriendsList", () => {
     const { getAllByLabelText } = context;
     await userEvent.click(getAllByLabelText("delete-friend")[0]);
 
-    expect(deleteFriend).toHaveBeenCalledWith(friends[0]["friendId"]);
+    expect(deleteFriend).toHaveBeenCalledWith(friends[0]["docId"]);
   });
 });
