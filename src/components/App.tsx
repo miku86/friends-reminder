@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { loadFriends } from "../state/friendsSlice";
-import { Friend, FriendsState } from "../utils/types";
+import { AppState, Friend } from "../utils/types";
 
 interface Props {
   loadFriends?: () => void;
@@ -17,9 +17,9 @@ export const App = ({ loadFriends, friends }: Props) => {
     <div className="App">
       {friends ? (
         <ul>
-          {friends.map(({ friendId, friendName }) => {
-            return <li key={friendId}>{friendName}</li>;
-          })}
+          {friends.map(({ friendId, friendName }) => (
+            <li key={friendId}>{friendName}</li>
+          ))}
         </ul>
       ) : (
         <p>Loading</p>
@@ -28,8 +28,8 @@ export const App = ({ loadFriends, friends }: Props) => {
   );
 };
 
-const mapStateToProps = (state: FriendsState) => ({
-  friends: state.items,
+const mapStateToProps = (state: AppState) => ({
+  friends: state.friends.items,
 });
 
 const mapDispatchToProps = {
