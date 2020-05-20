@@ -1,10 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import friendsReducer from "./friendsSlice";
 
 const store = configureStore({
-  reducer: {
-    friends: friendsReducer,
-  }
+  reducer: {}
 });
 
 export type AppDispatch = typeof store.dispatch;
