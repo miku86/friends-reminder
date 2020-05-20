@@ -13,6 +13,7 @@
     "@types/react-dom": "16.9.8",
     "@types/react-redux": "^7.1.8",
     "cypress": "^4.5.0",
+    "eslint-plugin-cypress": "^2.10.3",
     "firebase": "^7.14.4",
     "react": "16.13.1",
     "react-dom": "16.13.1",
@@ -29,7 +30,10 @@
     "test:e2e:gui": "cypress open"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "plugin:cypress/recommended"
+    ]
   },
   "browserslist": {
     "production": [

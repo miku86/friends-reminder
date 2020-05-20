@@ -1,10 +1,16 @@
-import React from 'react';
+import React from "react";
+import FriendsList from "./FriendsList/FriendsList";
 
-function App() {
+interface Props {}
+
+export const App = (props: Props) => {
   return (
     <div className="App">
+      <FriendsList />
     </div>
   );
-}
+};
+
+
 
 export default App;
