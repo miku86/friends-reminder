@@ -26,11 +26,12 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface Props {
-  loadFriends?: () => void;
+  deleteFriend?: (friendId: string) => void;
   friends?: Friend[];
+  loadFriends?: () => void;
 }
 
-export const FriendsList = ({ friends, loadFriends }: Props) => {
+export const FriendsList = ({ deleteFriend, friends, loadFriends }: Props) => {
   const classes = useStyles();
 
   useEffect(() => {
@@ -46,7 +47,7 @@ export const FriendsList = ({ friends, loadFriends }: Props) => {
             secondary={convertTimestampToHumanTime(lastTimeContacted)}
           />
           <ListItemSecondaryAction>
-            <IconButton edge="end" aria-label="delete">
+            <IconButton edge="end" aria-label="delete-friend" onClick={() => deleteFriend!(friendId)}>
               <Delete />
             </IconButton>
           </ListItemSecondaryAction>
