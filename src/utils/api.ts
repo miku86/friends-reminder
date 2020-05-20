@@ -8,10 +8,16 @@ const api = {
     let result = [] as Friend[];
 
     snapshot.forEach((doc: firebase.firestore.DocumentData) => {
-      result.push(doc.data());
+      result.push({
+        docId: doc.id,
+        ...doc.data(),
+      });
     });
 
     return result;
+  },
+  deleteFriend: async (docId: string) => {
+    return db.collection("friends").doc(docId).delete();
   },
 };
 
