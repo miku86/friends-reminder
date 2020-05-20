@@ -1,7 +1,7 @@
 export interface Friend {
   friendId: string;
   friendName: string;
-  lastContactTime: number;
+  lastTimeContacted: number;
 }
 
 export interface FriendsState {
