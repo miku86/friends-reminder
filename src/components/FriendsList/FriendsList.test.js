@@ -1,9 +1,9 @@
 import { render } from "@testing-library/react";
 import React from "react";
-import { createMockFriend } from "../utils/mockData";
-import { App } from "./App";
+import { createMockFriend } from "../../utils/mockData";
+import { FriendsList } from "./FriendsList";
 
-describe("App", () => {
+describe("FriendsList", () => {
   const friends = [
     createMockFriend("Max"),
     createMockFriend("Moritz")
@@ -13,7 +13,7 @@ describe("App", () => {
 
   beforeEach(()=>{
     loadFriends = jest.fn().mockName("loadFriends");
-    context = render(<App loadFriends={loadFriends} friends={friends} />);
+    context = render(<FriendsList loadFriends={loadFriends} friends={friends} />);
   })
 
   it("should load the friends on first render", () => {

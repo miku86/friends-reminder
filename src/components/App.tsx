@@ -1,39 +1,16 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { loadFriends } from "../state/friendsSlice";
-import { AppState, Friend } from "../utils/types";
+import React from "react";
+import FriendsList from "./FriendsList/FriendsList";
 
-interface Props {
-  loadFriends?: () => void;
-  friends?: Friend[];
-}
+interface Props {}
 
-export const App = ({ loadFriends, friends }: Props) => {
-  useEffect(() => {
-    loadFriends!();
-  }, [loadFriends]);
-
+export const App = (props: Props) => {
   return (
     <div className="App">
-      {friends ? (
-        <ul>
-          {friends.map(({ friendId, friendName }) => (
-            <li key={friendId}>{friendName}</li>
-          ))}
-        </ul>
-      ) : (
-        <p>Loading</p>
-      )}
+      <FriendsList />
     </div>
   );
 };
 
-const mapStateToProps = (state: AppState) => ({
-  friends: state.friends.items,
-});
 
-const mapDispatchToProps = {
-  loadFriends,
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
