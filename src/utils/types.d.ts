@@ -1,14 +1,16 @@
-export interface Friend {
-  docId: string;
-  friendId: string;
+export interface NewFriend {
   friendName: string;
   lastTimeContacted: number;
 }
 
+export interface Friend extends NewFriend {
+  docId: string;
+}
+
 export interface FriendsState {
-  items: Friend[]
+  items: Friend[];
 }
 
 export interface AppState {
-  friends: FriendsState,
+  friends: FriendsState;
 }

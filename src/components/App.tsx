@@ -1,5 +1,6 @@
 import { makeStyles, Theme } from "@material-ui/core";
 import React from "react";
+import AddFriend from "./AddFriend/AddFriend";
 import FriendsList from "./FriendsList/FriendsList";
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -9,7 +10,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
 }));
 
@@ -20,6 +21,7 @@ export const App = (props: Props) => {
 
   return (
     <div className={classes.root}>
+      <AddFriend />
       <FriendsList />
     </div>
   );
