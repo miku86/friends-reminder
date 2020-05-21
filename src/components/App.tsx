@@ -2,6 +2,7 @@ import { makeStyles, Theme } from "@material-ui/core";
 import React from "react";
 import AddFriend from "./AddFriend/AddFriend";
 import FriendsList from "./FriendsList/FriendsList";
+import Signup from "./Signup/Signup";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -21,6 +22,7 @@ export const App = (props: Props) => {
 
   return (
     <div className={classes.root}>
+      <Signup />
       <AddFriend />
       <FriendsList />
     </div>
