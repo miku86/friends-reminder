@@ -2,16 +2,19 @@ import { makeStyles, Theme } from "@material-ui/core";
 import React from "react";
 import AddFriend from "./AddFriend/AddFriend";
 import FriendsList from "./FriendsList/FriendsList";
-import Signup from "./Signup/Signup";
+import Navbar from "./Navbar/Navbar";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     minHeight: "100vh",
     backgroundColor: "hsl(0, 0%, 95%)",
+  },
+  content: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    paddingTop: "20px",
   },
 }));
 
@@ -22,9 +25,11 @@ export const App = (props: Props) => {
 
   return (
     <div className={classes.root}>
-      <Signup />
-      <AddFriend />
-      <FriendsList />
+      <Navbar />
+      <div className={classes.content}>
+        <AddFriend />
+        <FriendsList />
+      </div>
     </div>
   );
 };

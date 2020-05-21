@@ -42,8 +42,7 @@ export const Signup = ({ signup }: Props) => {
   return (
     <>
       <Button
-        variant="contained"
-        color="primary"
+        color="inherit"
         aria-label="signup-button"
         onClick={handleClickOpen}
       >
