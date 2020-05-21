@@ -14,3 +14,8 @@ export interface FriendsState {
 export interface AppState {
   friends: FriendsState;
 }
+
+export interface Credentials {
+  email: string;
+  password: string;
+}
