@@ -5,3 +5,8 @@ export const createMockFriend = (friendName: string) => ({
   friendName,
   lastContactTime: randomNumber(1589977129),
 });
+
+export const createMockCredentials = () => ({
+  email: "demo@demo.com",
+  password: "test123!",
+});
