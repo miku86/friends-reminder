@@ -6,7 +6,7 @@ import friendsReducer, {
   loadFriends,
 } from "./friendsSlice";
 
-describe("store", () => {
+describe("friends", () => {
   describe("loadFriends action", () => {
     it("should store the friends in the store", async () => {
       const friends = [createMockFriend("Max")];
