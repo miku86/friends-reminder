@@ -7,6 +7,8 @@ import {
   TextField,
 } from "@material-ui/core";
 import React, { ChangeEvent, useState } from "react";
+import { connect } from "react-redux";
+import { signup } from "../../state/authSlice";
 import { Credentials } from "../../utils/types";
 
 interface Props {

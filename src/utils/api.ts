@@ -1,5 +1,6 @@
+import { auth } from "firebase";
 import { COLLECTIONS, db } from "../config/firebase";
-import { Friend, NewFriend } from "./types";
+import { Credentials, Friend, NewFriend } from "./types";
 
 const api = {
   loadFriends: async () => {
@@ -26,6 +27,10 @@ const api = {
       docId: doc.id,
     };
     return friend;
+  },
+  signup: async ({ email, password }: Credentials) => {
+    const result = await auth().createUserWithEmailAndPassword(email, password);
+    console.log(result);
   },
 };
 

@@ -36,7 +36,7 @@ export const loadFriends = () => (dispatch: AppDispatch, _: any, api: any) => {
       dispatch(storeFriends(items));
     })
     .catch((error: any) => {
-      console.log(error);
+      console.error("Error getting friends: ", error);
     });
 };
 
@@ -51,7 +51,7 @@ export const deleteFriend = (docId: string) => (
       dispatch(removeFriend(docId));
     })
     .catch((error: any) => {
-      console.error("Error removing document: ", error);
+      console.error("Error removing friend: ", error);
     });
 };
 
@@ -66,7 +66,7 @@ export const addFriend = (newFriend: NewFriend) => (
       dispatch(createFriend(friend));
     })
     .catch((error: any) => {
-      console.error("Error adding document: ", error);
+      console.error("Error adding friend: ", error);
     });
 };
 
