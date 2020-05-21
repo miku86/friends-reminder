@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Friend } from "../utils/types";
+import { Friend, NewFriend } from "../utils/types";
 import { AppDispatch } from "./store";
 
 export const friendsSlice = createSlice({
@@ -9,8 +9,13 @@ export const friendsSlice = createSlice({
     count: (null as unknown) as number,
   },
   reducers: {
+    createFriend: (state, action: PayloadAction<Friend>) => {
+      state.items = state.items.concat(action.payload);
+    },
     removeFriend: (state, action: PayloadAction<string>) => {
-      state.items = state.items.filter(friend => friend.docId !== action.payload)
+      state.items = state.items.filter(
+        (friend) => friend.docId !== action.payload
+      );
     },
     storeFriends: (state, action: PayloadAction<Friend[]>) => {
       state.items = action.payload;
@@ -18,7 +23,11 @@ export const friendsSlice = createSlice({
   },
 });
 
-export const { removeFriend, storeFriends } = friendsSlice.actions;
+export const {
+  createFriend,
+  removeFriend,
+  storeFriends,
+} = friendsSlice.actions;
 
 export const loadFriends = () => (dispatch: AppDispatch, _: any, api: any) => {
   api
@@ -39,10 +48,25 @@ export const deleteFriend = (docId: string) => (
   api
     .deleteFriend(docId)
     .then(() => {
-      dispatch(removeFriend(docId))
+      dispatch(removeFriend(docId));
     })
     .catch((error: any) => {
       console.error("Error removing document: ", error);
+    });
+};
+
+export const addFriend = (newFriend: NewFriend) => (
+  dispatch: AppDispatch,
+  _: any,
+  api: any
+) => {
+  api
+    .addFriend(newFriend)
+    .then((friend: Friend) => {
+      dispatch(createFriend(friend));
+    })
+    .catch((error: any) => {
+      console.error("Error adding document: ", error);
     });
 };
 

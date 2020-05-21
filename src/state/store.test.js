@@ -1,6 +1,10 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { createMockFriend } from "../utils/mockData";
-import friendsReducer, { deleteFriend, loadFriends } from "./friendsSlice";
+import friendsReducer, {
+  addFriend,
+  deleteFriend,
+  loadFriends,
+} from "./friendsSlice";
 
 describe("store", () => {
   describe("loadFriends action", () => {
@@ -55,6 +59,36 @@ describe("store", () => {
       });
 
       await store.dispatch(deleteFriend(friends[0]["docId"]));
+
+      expect(store.getState().items).toEqual(expectedState);
+    });
+  });
+
+  describe("addFriend action", () => {
+    it("should add a friend to the store", async () => {
+      const newFriend = createMockFriend("Fritz");
+
+      const api = {
+        addFriend: () => Promise.resolve(newFriend),
+      };
+
+      const expectedState = [].concat(newFriend);
+
+      const store = configureStore({
+        reducer: friendsReducer,
+        preloadedState: {
+          items: [],
+        },
+        middleware: [
+          ...getDefaultMiddleware({
+            thunk: {
+              extraArgument: api,
+            },
+          }),
+        ],
+      });
+
+      await store.dispatch(addFriend(newFriend));
 
       expect(store.getState().items).toEqual(expectedState);
     });

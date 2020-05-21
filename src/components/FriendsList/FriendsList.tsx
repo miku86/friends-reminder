@@ -20,13 +20,14 @@ const useStyles = makeStyles((theme: Theme) => ({
       backgroundColor: theme.palette.background.paper,
       borderRadius: "4px",
       margin: "20px",
-      boxShadow: "0 1px 1px 0 rgba(0,0,0,0.2),0 2px 1px -1px rgba(0,0,0,0.2),0 1px 3px 0 rgba(0,0,0,0.2)"
+      boxShadow:
+        "0 1px 1px 0 rgba(0,0,0,0.2),0 2px 1px -1px rgba(0,0,0,0.2),0 1px 3px 0 rgba(0,0,0,0.2)",
     },
   },
 }));
 
 interface Props {
-  deleteFriend?: (friendId: string) => void;
+  deleteFriend?: (docId: string) => void;
   friends?: Friend[];
   loadFriends?: () => void;
 }
@@ -40,14 +41,18 @@ export const FriendsList = ({ deleteFriend, friends, loadFriends }: Props) => {
 
   return friends ? (
     <List className={classes.root}>
-      {friends.map(({ docId, friendId, friendName, lastTimeContacted }) => (
-        <ListItem key={friendId} role={undefined}>
+      {friends.map(({ docId, friendName, lastTimeContacted }) => (
+        <ListItem key={docId} role={undefined}>
           <ListItemText
             primary={friendName}
             secondary={convertTimestampToHumanTime(lastTimeContacted)}
           />
           <ListItemSecondaryAction>
-            <IconButton edge="end" aria-label="delete-friend" onClick={() => deleteFriend!(docId)}>
+            <IconButton
+              edge="end"
+              aria-label="delete-friend"
+              onClick={() => deleteFriend!(docId)}
+            >
               <Delete />
             </IconButton>
           </ListItemSecondaryAction>
