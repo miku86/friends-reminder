@@ -1,15 +1,19 @@
-import firebase from 'firebase/app';
-import 'firebase/firestore';
+import firebase from "firebase/app";
+import "firebase/firestore";
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyCJc1s5gnEI1jyD96jwL6Wm1tRzihnPfnE",
-  authDomain: "friends-reminder-e17c0.firebaseapp.com",
-  databaseURL: "https://friends-reminder-e17c0.firebaseio.com",
-  projectId: "friends-reminder-e17c0",
-  storageBucket: "friends-reminder-e17c0.appspot.com",
-  messagingSenderId: "232215369152",
-  appId: "1:232215369152:web:d2c6f7e1e9238151aba425",
-  measurementId: "G-87GTKDZXB7"
+  apiKey: process.env.REACT_APP_APIKEY,
+  authDomain: process.env.REACT_APP_AUTHDOMAIN,
+  databaseURL: process.env.REACT_APP_DATABASEURL,
+  projectId: process.env.REACT_APP_PROJECTID,
+  storageBucket: process.env.REACT_APP_STORAGEBUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGINGSENDERID,
+  appId: process.env.REACT_APP_APPID,
+  measurementId: process.env.REACT_APP_MEASUREMENTID,
+};
+
+export const COLLECTIONS = {
+  FRIENDS: "friends",
 };
 
 firebase.initializeApp(firebaseConfig);

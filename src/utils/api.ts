@@ -1,9 +1,5 @@
-import { db } from "../config/firebase";
+import { COLLECTIONS, db } from "../config/firebase";
 import { Friend, NewFriend } from "./types";
-
-const COLLECTIONS = {
-  FRIENDS: "friends",
-};
 
 const api = {
   loadFriends: async () => {
