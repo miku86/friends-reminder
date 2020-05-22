@@ -15,3 +15,6 @@ export const createWrongCredentials = () => ({
   email: "abc@def.com",
   password: "abcdef",
 });
+
+export const createWrongEmail = () => "abc";
+export const createShortPassword = () => "abc";
