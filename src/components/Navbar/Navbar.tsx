@@ -6,8 +6,9 @@ import {
   Typography,
 } from "@material-ui/core";
 import React from "react";
+import { connect } from "react-redux";
+import { AppState, AuthState } from "../../utils/types";
 import Signin from "../Signin/Signin";
-import Signout from "../Signout/Signout";
 import Signup from "../Signup/Signup";
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -22,9 +23,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-interface Props {}
+interface Props {
+  isAuthenticated: AuthState["isAuthenticated"];
+}
 
-const Navbar = (props: Props) => {
+export const Navbar = ({ isAuthenticated }: Props) => {
   const classes = useStyles();
 
   return (
@@ -34,13 +37,20 @@ const Navbar = (props: Props) => {
           <Typography variant="h6" className={classes.title}>
             Friends Reminder
           </Typography>
-          <Signup />
-          <Signin />
-          <Signout />
+          {!isAuthenticated ? (
+            <>
+              <Signup />
+              <Signin />
+            </>
+          ) : null}
         </Toolbar>
       </AppBar>
     </div>
   );
 };
 
-export default Navbar;
+const mapStateToProps = (state: AppState) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps)(Navbar);
