@@ -1,10 +1,7 @@
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
-import {
-  createMockCredentials,
-  createWrongCredentials,
-} from "../../utils/mockData";
+import { createMockCredentials } from "../../utils/mockData";
 import { Signin } from "./Signin";
 
 describe("Signin", () => {
@@ -41,16 +38,9 @@ describe("Signin", () => {
   });
 
   it("should show an error when signin failed", async () => {
-    const wrongCredentials = createWrongCredentials();
-    const { email, password } = wrongCredentials;
-    const { getByLabelText } = render(
-      <Signin signin={signin} authError={"error"} />
-    );
+    const { getByLabelText } = render(<Signin authError={"error"} />);
 
     await userEvent.click(getByLabelText("signin-button"));
-    userEvent.type(getByLabelText("E-Mail"), email);
-    userEvent.type(getByLabelText("Password"), password);
-    await userEvent.click(getByLabelText("signin-submit"));
 
     expect(getByLabelText("signin-error")).toBeInTheDocument();
   });
