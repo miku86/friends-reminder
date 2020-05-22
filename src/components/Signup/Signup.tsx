@@ -6,16 +6,18 @@ import {
   DialogTitle,
   TextField,
 } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 import React, { ChangeEvent, useState } from "react";
 import { connect } from "react-redux";
 import { signup } from "../../state/authSlice";
-import { Credentials } from "../../utils/types";
+import { AppState, AuthState, Credentials } from "../../utils/types";
 
 interface Props {
+  authError: AuthState["authError"];
   signup?: ({ email, password }: Credentials) => void;
 }
 
-export const Signup = ({ signup }: Props) => {
+export const Signup = ({ authError, signup }: Props) => {
   const [open, setOpen] = useState(false);
   const [credentials, setCredentials] = useState({ email: "", password: "" });
 
@@ -51,6 +53,11 @@ export const Signup = ({ signup }: Props) => {
       <Dialog open={open} onClose={handleClose} aria-label="signup-modal">
         <DialogTitle>Signup</DialogTitle>
         <DialogContent>
+          {authError && (
+            <Alert severity="error" aria-label="signup-error">
+              {authError}
+            </Alert>
+          )}
           <TextField
             autoFocus
             margin="dense"
@@ -84,8 +91,12 @@ export const Signup = ({ signup }: Props) => {
   );
 };
 
+const mapStateToProps = (state: AppState) => ({
+  authError: state.auth.authError,
+});
+
 const mapDispatchToProps = {
   signup,
 };
 
-export default connect(null, mapDispatchToProps)(Signup);
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);
