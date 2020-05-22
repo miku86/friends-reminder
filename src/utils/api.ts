@@ -29,8 +29,10 @@ const api = {
     return friend;
   },
   signup: async ({ email, password }: Credentials) => {
-    const result = await auth().createUserWithEmailAndPassword(email, password);
-    console.log(result);
+    return auth().createUserWithEmailAndPassword(email, password);
+  },
+  signin: async ({ email, password }: Credentials) => {
+    return auth().signInWithEmailAndPassword(email, password);
   },
 };
 
