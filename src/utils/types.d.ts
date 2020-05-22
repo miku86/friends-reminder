@@ -9,7 +9,8 @@ export interface Friend extends NewFriend {
 
 export interface AuthState {
   isAuthenticated: boolean;
-  uid: null | string;
+  uid: string | null;
+  authError: string | null;
 }
 export interface FriendsState {
   items: Friend[];
