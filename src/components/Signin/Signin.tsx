@@ -3,6 +3,7 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
+  DialogContentText,
   DialogTitle,
   TextField,
 } from "@material-ui/core";
@@ -51,6 +52,7 @@ export const Signin = ({ signin }: Props) => {
       <Dialog open={open} onClose={handleClose} aria-label="signin-modal">
         <DialogTitle>Signin</DialogTitle>
         <DialogContent>
+          <DialogContentText>Demo: demo@miku86.com / demo123</DialogContentText>
           <TextField
             autoFocus
             margin="dense"
