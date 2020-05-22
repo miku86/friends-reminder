@@ -10,3 +10,8 @@ export const createMockCredentials = () => ({
   email: "demo@demo.com",
   password: "test123!",
 });
+
+export const createWrongCredentials = () => ({
+  email: "abc@def.com",
+  password: "abcdef",
+});
