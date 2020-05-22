@@ -7,16 +7,18 @@ import {
   DialogTitle,
   TextField,
 } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 import React, { ChangeEvent, useState } from "react";
 import { connect } from "react-redux";
 import { signin } from "../../state/authSlice";
-import { Credentials } from "../../utils/types";
+import { AppState, AuthState, Credentials } from "../../utils/types";
 
 interface Props {
+  authError: AuthState["authError"];
   signin?: (credentials: Credentials) => void;
 }
 
-export const Signin = ({ signin }: Props) => {
+export const Signin = ({ authError, signin }: Props) => {
   const [open, setOpen] = useState(false);
   const [credentials, setCredentials] = useState({ email: "", password: "" });
 
@@ -52,6 +54,11 @@ export const Signin = ({ signin }: Props) => {
       <Dialog open={open} onClose={handleClose} aria-label="signin-modal">
         <DialogTitle>Signin</DialogTitle>
         <DialogContent>
+          {authError && (
+            <Alert severity="error" aria-label="signin-error">
+              {authError}
+            </Alert>
+          )}
           <DialogContentText>Demo: demo@miku86.com / demo123</DialogContentText>
           <TextField
             autoFocus
@@ -86,8 +93,12 @@ export const Signin = ({ signin }: Props) => {
   );
 };
 
+const mapStateToProps = (state: AppState) => ({
+  authError: state.auth.authError,
+});
+
 const mapDispatchToProps = {
   signin,
 };
 
-export default connect(null, mapDispatchToProps)(Signin);
+export default connect(mapStateToProps, mapDispatchToProps)(Signin);
