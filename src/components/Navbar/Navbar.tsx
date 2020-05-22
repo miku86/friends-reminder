@@ -6,7 +6,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import React from "react";
-import { Signup } from "../Signup/Signup";
+import Signup from "../Signup/Signup";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
