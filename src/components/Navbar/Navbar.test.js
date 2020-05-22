@@ -17,4 +17,15 @@ describe("Navbar", () => {
     expect(getByLabelText("signin-button")).toBeInTheDocument();
     expect(queryByLabelText("signout-button")).not.toBeInTheDocument();
   });
+
+  it("should only show signout if authenticated", () => {
+    const context = render(
+      <Provider store={store}>
+        <Navbar isAuthenticated={true} />
+      </Provider>
+    );
+    const { getByLabelText } = context;
+
+    expect(getByLabelText("signout-button")).toBeInTheDocument();
+  });
 });
