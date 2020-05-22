@@ -15,15 +15,14 @@ jobs:
       - name: Unit Tests
         run: npm run test:unit:coverage
         env:
-          REACT_APP_PROJECTID: ${{ secrets.REACT_APP_PROJECTID }}
           REACT_APP_APIKEY: ${{ secrets.REACT_APP_APIKEY }}
+          REACT_APP_APPID: ${{ secrets.REACT_APP_APPID }}
           REACT_APP_AUTHDOMAIN: ${{ secrets.REACT_APP_AUTHDOMAIN }}
           REACT_APP_DATABASEURL: ${{ secrets.REACT_APP_DATABASEURL }}
+          REACT_APP_MEASUREMENTID: ${{ secrets.REACT_APP_MEASUREMENTID }}
+          REACT_APP_MESSAGINGSENDERID: ${{ secrets.REACT_APP_MESSAGINGSENDERID }}
           REACT_APP_PROJECTID: ${{ secrets.REACT_APP_PROJECTID }}
           REACT_APP_STORAGEBUCKET: ${{ secrets.REACT_APP_STORAGEBUCKET }}
-          REACT_APP_MESSAGINGSENDERID: ${{ secrets.REACT_APP_MESSAGINGSENDERID }}
-          REACT_APP_APPID: ${{ secrets.REACT_APP_APPID }}
-          REACT_APP_MEASUREMENTID: ${{ secrets.REACT_APP_MEASUREMENTID }}
       # currently not running, will do it later
       #- name: E2E Tests
       #  uses: cypress-io/github-action@v1
