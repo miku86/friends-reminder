@@ -9,6 +9,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { AppState, AuthState } from "../../utils/types";
 import Signin from "../Signin/Signin";
+import Signout from "../Signout/Signout";
 import Signup from "../Signup/Signup";
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -37,12 +38,14 @@ export const Navbar = ({ isAuthenticated }: Props) => {
           <Typography variant="h6" className={classes.title}>
             Friends Reminder
           </Typography>
-          {!isAuthenticated ? (
+          {isAuthenticated ? (
+            <Signout />
+          ) : (
             <>
               <Signup />
               <Signin />
             </>
-          ) : null}
+          )}
         </Toolbar>
       </AppBar>
     </div>
