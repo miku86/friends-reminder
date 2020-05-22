@@ -34,6 +34,9 @@ const api = {
   signin: async ({ email, password }: Credentials) => {
     return auth().signInWithEmailAndPassword(email, password);
   },
+  signout: async () => {
+    return auth().signOut();
+  },
 };
 
 export default api;
