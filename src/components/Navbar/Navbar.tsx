@@ -7,6 +7,7 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import Signin from "../Signin/Signin";
+import Signout from "../Signout/Signout";
 import Signup from "../Signup/Signup";
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -35,6 +36,7 @@ const Navbar = (props: Props) => {
           </Typography>
           <Signup />
           <Signin />
+          <Signout />
         </Toolbar>
       </AppBar>
     </div>
