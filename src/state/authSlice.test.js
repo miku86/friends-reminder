@@ -1,6 +1,6 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { createMockCredentials } from "../utils/mockData";
-import authReducer, { signin, signup } from "./authSlice";
+import authReducer, { signin, signout, signup } from "./authSlice";
 
 describe("auth", () => {
   describe("signup action", () => {
@@ -99,6 +99,30 @@ describe("auth", () => {
       await store.dispatch(signin(credentials));
 
       expect(store.getState().isAuthenticated).toEqual(undefined);
+    });
+  });
+
+  describe("signout action", () => {
+    it("should show a successful signout", async () => {
+      const api = {
+        signout: () => Promise.resolve(),
+      };
+
+      const store = configureStore({
+        reducer: authReducer,
+        preloadedState: {},
+        middleware: [
+          ...getDefaultMiddleware({
+            thunk: {
+              extraArgument: api,
+            },
+          }),
+        ],
+      });
+
+      await store.dispatch(signout());
+
+      expect(store.getState().isAuthenticated).toEqual(false);
     });
   });
 });
