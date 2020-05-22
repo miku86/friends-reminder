@@ -6,6 +6,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import React from "react";
+import Signin from "../Signin/Signin";
 import Signup from "../Signup/Signup";
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -33,6 +34,7 @@ const Navbar = (props: Props) => {
             Friends Reminder
           </Typography>
           <Signup />
+          <Signin />
         </Toolbar>
       </AppBar>
     </div>
