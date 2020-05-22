@@ -14,6 +14,8 @@ jobs:
 
       - name: Unit Tests
         run: npm run test:unit:coverage
+        env:
+          REACT_APP_PROJECTID: ${{ secrets.REACT_APP_PROJECTID }}
       # currently not running, will do it later
       #- name: E2E Tests
       #  uses: cypress-io/github-action@v1
