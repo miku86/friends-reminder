@@ -1,13 +1,15 @@
 import { Button } from "@material-ui/core";
 import React from "react";
+import { connect } from "react-redux";
+import { signout } from "../../state/authSlice";
 
 interface Props {
-  signout: () => void;
+  signout?: () => void;
 }
 
 export const Signout = ({ signout }: Props) => {
   const handleSubmit = () => {
-    signout();
+    signout!();
   };
 
   return (
@@ -17,4 +19,8 @@ export const Signout = ({ signout }: Props) => {
   );
 };
 
-export default Signout;
+const mapDispatchToProps = {
+  signout,
+};
+
+export default connect(null, mapDispatchToProps)(Signout);
