@@ -10,13 +10,14 @@ import {
 import React, { ChangeEvent, useState } from "react";
 import { connect } from "react-redux";
 import { addFriend } from "../../state/friendsSlice";
-import { NewFriend } from "../../utils/types";
+import { AppState, NewFriend } from "../../utils/types";
 
 interface Props {
   addFriend?: (newFriend: NewFriend) => void;
+  userId?: NewFriend["userId"];
 }
 
-export const AddFriend = ({ addFriend }: Props) => {
+export const AddFriend = ({ addFriend, userId }: Props) => {
   const [open, setOpen] = useState(false);
   const [friendName, setFriendName] = useState("");
 
@@ -34,6 +35,7 @@ export const AddFriend = ({ addFriend }: Props) => {
 
   const handleSubmit = () => {
     const newFriend = {
+      userId,
       friendName,
       lastTimeContacted: 0,
     };
@@ -81,8 +83,12 @@ export const AddFriend = ({ addFriend }: Props) => {
   );
 };
 
+const mapStateToProps = (state: AppState) => ({
+  userId: state.auth.userId,
+});
+
 const mapDispatchToProps = {
   addFriend,
 };
 
-export default connect(null, mapDispatchToProps)(AddFriend);
+export default connect(mapStateToProps, mapDispatchToProps)(AddFriend);

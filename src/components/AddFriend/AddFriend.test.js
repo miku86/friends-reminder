@@ -1,6 +1,7 @@
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
+import { createMockFriend } from "../../utils/mockData";
 import { AddFriend } from "./AddFriend";
 
 describe("AddFriend", () => {
@@ -9,7 +10,7 @@ describe("AddFriend", () => {
 
   beforeEach(() => {
     addFriend = jest.fn().mockName("addFriend");
-    context = render(<AddFriend addFriend={addFriend} />);
+    context = render(<AddFriend addFriend={addFriend} userId={"111"} />);
   });
 
   it("should show a button to add a friend", () => {
@@ -24,9 +25,12 @@ describe("AddFriend", () => {
   });
 
   it("should run the add friend function", async () => {
+    const newFriend = createMockFriend({ docId: false });
     const { getByLabelText } = context;
+
     await userEvent.click(getByLabelText("add-friend-button"));
     await userEvent.click(getByLabelText("add-friend-submit"));
-    expect(addFriend).toHaveBeenCalled();
+
+    expect(addFriend).toHaveBeenCalledWith(newFriend);
   });
 });
