@@ -1,10 +1,13 @@
 import { auth } from "firebase";
 import { COLLECTIONS, db } from "../config/firebase";
-import { Credentials, Friend, NewFriend } from "./types";
+import { Credentials, Friend, NewFriend, UserId } from "./types";
 
 const api = {
-  loadFriends: async () => {
-    const snapshot = await db.collection(COLLECTIONS.FRIENDS).get();
+  loadFriends: async (userId: UserId) => {
+    const snapshot = await db
+      .collection(COLLECTIONS.FRIENDS)
+      .where("userId", "==", userId)
+      .get();
 
     let result = [] as Friend[];
 
