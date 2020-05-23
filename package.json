@@ -15,7 +15,7 @@
     "@types/react": "16.9.35",
     "@types/react-dom": "16.9.8",
     "@types/react-redux": "7.1.8",
-    "cypress": "4.5.0",
+    "cypress": "4.6.0",
     "eslint-plugin-cypress": "2.10.3",
     "firebase": "7.14.5",
     "react": "16.13.1",
