@@ -1,10 +1,18 @@
 import { randomNumber } from "./random";
+import { Friend } from "./types";
 
-export const createMockFriend = (friendName: string) => ({
-  docId: randomNumber(10000),
-  friendName,
-  lastContactTime: randomNumber(1589977129),
-});
+export const createMockFriend = ({ friendName = "", docId = true }) => {
+  const friend: Friend = {
+    friendName,
+    lastTimeContacted: 0,
+  };
+
+  if (docId) {
+    friend["docId"] = String(randomNumber(10000));
+  }
+
+  return friend;
+};
 
 export const createMockCredentials = () => ({
   email: "demo@demo.com",

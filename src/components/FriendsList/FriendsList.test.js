@@ -5,7 +5,10 @@ import { createMockFriend } from "../../utils/mockData";
 import { FriendsList } from "./FriendsList";
 
 describe("FriendsList", () => {
-  const friends = [createMockFriend("Max"), createMockFriend("Moritz")];
+  const friends = [
+    createMockFriend({ friendName: "Max" }),
+    createMockFriend({ friendName: "Moritz" }),
+  ];
   let context;
   let loadFriends;
   let deleteFriend;
