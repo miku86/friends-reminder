@@ -1,7 +1,9 @@
 import { makeStyles, Theme } from "@material-ui/core";
 import React from "react";
-import AddFriend from "./AddFriend/AddFriend";
-import FriendsList from "./FriendsList/FriendsList";
+import { connect } from "react-redux";
+import { AppState, AuthState } from "../utils/types";
+import Content from "./Content/Content";
+import Landing from "./Landing/Landing";
 import Navbar from "./Navbar/Navbar";
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -9,29 +11,25 @@ const useStyles = makeStyles((theme: Theme) => ({
     minHeight: "100vh",
     backgroundColor: "hsl(0, 0%, 95%)",
   },
-  content: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingTop: "20px",
-  },
 }));
 
-interface Props {}
+interface Props {
+  isAuthenticated?: AuthState["isAuthenticated"];
+}
 
-export const App = (props: Props) => {
+export const App = ({ isAuthenticated }: Props) => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <Navbar />
-      <div className={classes.content}>
-        <AddFriend />
-        <FriendsList />
-      </div>
+      {isAuthenticated ? <Content /> : <Landing />}
     </div>
   );
 };
 
-export default App;
+const mapStateToProps = (state: AppState) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps)(App);
