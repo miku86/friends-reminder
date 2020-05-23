@@ -32,7 +32,7 @@ describe("auth", () => {
       const credentials = createMockCredentials();
 
       const api = {
-        signup: () => Promise.reject(),
+        signup: () => Promise.reject().catch(() => {}),
       };
 
       const store = configureStore({
@@ -81,7 +81,7 @@ describe("auth", () => {
       const credentials = createMockCredentials();
 
       const api = {
-        signin: () => Promise.reject(),
+        signin: () => Promise.reject().catch(() => {}),
       };
 
       const store = configureStore({
