@@ -13,9 +13,7 @@ import Signout from "../Signout/Signout";
 import Signup from "../Signup/Signup";
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    flexGrow: 1,
-  },
+  root: {},
   menuButton: {
     marginRight: theme.spacing(2),
   },
