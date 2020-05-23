@@ -6,18 +6,18 @@ export const authSlice = createSlice({
   name: "auth",
   initialState: {
     isAuthenticated: false,
-    uid: null,
+    userId: null,
     authError: null,
   } as AuthState,
   reducers: {
     isAuthenticated: (state, action: PayloadAction<string>) => {
       state.isAuthenticated = true;
-      state.uid = action.payload;
+      state.userId = action.payload;
       state.authError = null;
     },
     isNotAuthenticated: (state) => {
       state.isAuthenticated = false;
-      state.uid = null;
+      state.userId = null;
       state.authError = null;
     },
     setAuthError: (state, action: PayloadAction<string>) => {
