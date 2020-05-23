@@ -9,7 +9,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { deleteFriend, loadFriends } from "../../state/friendsSlice";
 import { convertTimestampToHumanTime } from "../../utils/date";
-import { AppState, Friend } from "../../utils/types";
+import { AppState, Friend, UserId } from "../../utils/types";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -29,15 +29,21 @@ const useStyles = makeStyles((theme: Theme) => ({
 interface Props {
   deleteFriend?: (docId: string) => void;
   friends?: Friend[];
-  loadFriends?: () => void;
+  loadFriends?: (userId: UserId) => void;
+  userId: UserId;
 }
 
-export const FriendsList = ({ deleteFriend, friends, loadFriends }: Props) => {
+export const FriendsList = ({
+  deleteFriend,
+  friends,
+  loadFriends,
+  userId,
+}: Props) => {
   const classes = useStyles();
 
   useEffect(() => {
-    loadFriends!();
-  }, [loadFriends]);
+    loadFriends!(userId);
+  }, [loadFriends, userId]);
 
   return friends ? (
     <List className={classes.root}>
@@ -66,6 +72,7 @@ export const FriendsList = ({ deleteFriend, friends, loadFriends }: Props) => {
 
 const mapStateToProps = (state: AppState) => ({
   friends: state.friends.items,
+  userId: state.auth.userId,
 });
 
 const mapDispatchToProps = {

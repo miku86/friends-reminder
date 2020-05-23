@@ -3,11 +3,11 @@ import { apiConfig } from "../../../src/config/api";
 const mockResponse = [
   {
     friendName: "Max",
-    lastContactTime: 1589977129,
+    lastTimeContacted: 1589977129,
   },
   {
     friendName: "Moritz",
-    lastContactTime: 1589977130,
+    lastTimeContacted: 1589977130,
   },
 ];
 
