@@ -1,5 +1,7 @@
+export type UserId = string | undefined | null;
+
 export interface NewFriend {
-  userId: string | undefined | null;
+  userId: UserId;
   friendName: string;
   lastTimeContacted: number;
 }
@@ -14,7 +16,7 @@ export interface MockFriend extends NewFriend {
 
 export interface AuthState {
   isAuthenticated: boolean;
-  userId: string | undefined | null;
+  userId: UserId;
   authError: string | null;
 }
 export interface FriendsState {
