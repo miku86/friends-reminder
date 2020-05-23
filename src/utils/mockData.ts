@@ -1,8 +1,13 @@
 import { randomNumber } from "./random";
-import { Friend } from "./types";
+import { MockFriend } from "./types";
 
-export const createMockFriend = ({ friendName = "", docId = true }) => {
-  const friend: Friend = {
+export const createMockFriend = ({
+  friendName = "",
+  docId = true,
+  userId = "111",
+}) => {
+  const friend: MockFriend = {
+    userId,
     friendName,
     lastTimeContacted: 0,
   };
