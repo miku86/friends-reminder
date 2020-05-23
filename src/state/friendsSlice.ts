@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Friend, NewFriend } from "../utils/types";
+import { Friend, NewFriend, UserId } from "../utils/types";
 import { AppDispatch } from "./store";
 
 export const friendsSlice = createSlice({
@@ -29,9 +29,13 @@ export const {
   storeFriends,
 } = friendsSlice.actions;
 
-export const loadFriends = () => (dispatch: AppDispatch, _: any, api: any) => {
+export const loadFriends = (userId: UserId) => (
+  dispatch: AppDispatch,
+  _: any,
+  api: any
+) => {
   api
-    .loadFriends()
+    .loadFriends(userId)
     .then((items: Friend[]) => {
       dispatch(storeFriends(items));
     })
