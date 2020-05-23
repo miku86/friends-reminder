@@ -1,15 +1,20 @@
 export interface NewFriend {
+  userId: string | undefined | null;
   friendName: string;
   lastTimeContacted: number;
 }
 
 export interface Friend extends NewFriend {
+  docId: string;
+}
+
+export interface MockFriend extends NewFriend {
   docId?: string;
 }
 
 export interface AuthState {
   isAuthenticated: boolean;
-  uid: string | null;
+  userId: string | undefined | null;
   authError: string | null;
 }
 export interface FriendsState {
