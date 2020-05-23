@@ -4,7 +4,7 @@ export interface NewFriend {
 }
 
 export interface Friend extends NewFriend {
-  docId: string;
+  docId?: string;
 }
 
 export interface AuthState {
