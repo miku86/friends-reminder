@@ -8,8 +8,8 @@ import { Delete } from "@material-ui/icons";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { deleteFriend, loadFriends } from "../../state/friendsSlice";
-import { convertTimestampToHumanTime } from "../../utils/date";
 import { AppState, Friend, UserId } from "../../utils/types";
+import DatePicker from "../DatePicker/DatePicker";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -45,14 +45,21 @@ export const FriendsList = ({
     loadFriends!(userId);
   }, [loadFriends, userId]);
 
+  const sortFriends = (friends: Friend[]) => {
+    const sortedFriends = friends.map((el) => el);
+    sortedFriends.sort(
+      (friendOne, friendTwo) =>
+        friendOne.lastTimeContacted - friendTwo.lastTimeContacted
+    );
+    return sortedFriends;
+  };
+
   return friends ? (
     <List className={classes.root}>
-      {friends.map(({ docId, friendName, lastTimeContacted }) => (
+      {sortFriends(friends).map(({ docId, friendName, lastTimeContacted }) => (
         <ListItem key={docId} role={undefined}>
-          <ListItemText
-            primary={friendName}
-            secondary={convertTimestampToHumanTime(lastTimeContacted)}
-          />
+          <ListItemText primary={friendName} />
+          <DatePicker docId={docId} lastTimeContacted={lastTimeContacted} />
           <ListItemSecondaryAction>
             <IconButton
               edge="end"

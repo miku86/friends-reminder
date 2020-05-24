@@ -1,3 +1,4 @@
+import { getCurrentTimestamp } from "./date";
 import { randomNumber } from "./random";
 import { MockFriend } from "./types";
 
@@ -9,7 +10,7 @@ export const createMockFriend = ({
   const friend: MockFriend = {
     userId,
     friendName,
-    lastTimeContacted: 0,
+    lastTimeContacted: getCurrentTimestamp(),
   };
 
   if (docId) {
