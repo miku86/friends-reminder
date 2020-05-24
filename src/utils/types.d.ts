@@ -2,7 +2,7 @@ export type UserId = string | undefined | null;
 export type DocId = string;
 export type LastTimeContacted = number;
 export type FriendName = string;
-export type IsAuthenticated = boolean;
+export type isAuthed = boolean;
 export type AuthError = string | null;
 export type Email = string;
 export type Password = string;
@@ -27,7 +27,7 @@ export interface UpdateFriend {
 }
 
 export interface AuthState {
-  isAuthenticated: IsAuthenticated;
+  isAuthed: IsAuthed;
   userId: UserId;
   authError: AuthError;
 }

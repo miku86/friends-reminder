@@ -4,7 +4,7 @@ import { Navbar } from "./Navbar";
 
 describe("Navbar", () => {
   it("should only show signup and signin if not authenticated", () => {
-    const context = renderWithRedux(<Navbar isAuthenticated={false} />);
+    const context = renderWithRedux(<Navbar isAuthed={false} />);
     const { getByLabelText, queryByLabelText } = context;
 
     expect(getByLabelText("signup-button")).toBeInTheDocument();
@@ -13,7 +13,7 @@ describe("Navbar", () => {
   });
 
   it("should only show signout if authenticated", () => {
-    const context = renderWithRedux(<Navbar isAuthenticated={true} />);
+    const context = renderWithRedux(<Navbar isAuthed={true} />);
     const { getByLabelText } = context;
 
     expect(getByLabelText("signout-button")).toBeInTheDocument();

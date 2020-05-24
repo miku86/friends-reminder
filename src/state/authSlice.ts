@@ -1,22 +1,22 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AuthState, Credentials } from "../utils/types";
+import { AuthState, Credentials, UserId } from "../utils/types";
 import { AppDispatch } from "./store";
 
 export const authSlice = createSlice({
   name: "auth",
   initialState: {
-    isAuthenticated: false,
+    isAuthed: false,
     userId: null,
     authError: null,
   } as AuthState,
   reducers: {
-    isAuthenticated: (state, action: PayloadAction<string>) => {
-      state.isAuthenticated = true;
+    isAuthenticated: (state, action: PayloadAction<UserId>) => {
+      state.isAuthed = true;
       state.userId = action.payload;
       state.authError = null;
     },
     isNotAuthenticated: (state) => {
-      state.isAuthenticated = false;
+      state.isAuthed = false;
       state.userId = null;
       state.authError = null;
     },
