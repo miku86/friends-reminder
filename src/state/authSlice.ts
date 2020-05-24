@@ -81,4 +81,12 @@ export const signout = () => (dispatch: AppDispatch, _: any, api: any) => {
     });
 };
 
+export const setIsAuthenticated = (userId: UserId) => (
+  dispatch: AppDispatch,
+  _: any,
+  api: any
+) => {
+  dispatch(isAuthenticated(userId));
+};
+
 export default authSlice.reducer;
