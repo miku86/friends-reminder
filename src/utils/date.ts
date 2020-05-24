@@ -6,3 +6,7 @@ export const convertHumanTimeToTimeStamp = (humanTime: Date | null): number => {
   if (!humanTime) return 0;
   return humanTime.valueOf();
 };
+
+export const getCurrentTimestamp = (): number => {
+  return new Date().valueOf();
+};
