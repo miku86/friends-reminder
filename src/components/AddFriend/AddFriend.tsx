@@ -10,6 +10,7 @@ import {
 import React, { ChangeEvent, useState } from "react";
 import { connect } from "react-redux";
 import { addFriend } from "../../state/friendsSlice";
+import { getCurrentTimestamp } from "../../utils/date";
 import { AppState, NewFriend } from "../../utils/types";
 
 interface Props {
@@ -37,7 +38,7 @@ export const AddFriend = ({ addFriend, userId }: Props) => {
     const newFriend = {
       userId,
       friendName,
-      lastTimeContacted: 0,
+      lastTimeContacted: getCurrentTimestamp(),
     };
     addFriend!(newFriend);
     handleClose();
