@@ -1,23 +1,35 @@
 export type UserId = string | undefined | null;
+export type DocId = string;
+export type LastTimeContacted = number;
+export type FriendName = string;
+export type IsAuthenticated = boolean;
+export type AuthError = string | null;
+export type Email = string;
+export type Password = string;
 
 export interface NewFriend {
   userId: UserId;
-  friendName: string;
-  lastTimeContacted: number;
+  friendName: FriendName;
+  lastTimeContacted: LastTimeContacted;
 }
 
 export interface Friend extends NewFriend {
-  docId: string;
+  docId: DocId;
 }
 
 export interface MockFriend extends NewFriend {
-  docId?: string;
+  docId?: DocId;
+}
+
+export interface UpdateFriend {
+  docId: DocId;
+  lastTimeContacted: LastTimeContacted;
 }
 
 export interface AuthState {
-  isAuthenticated: boolean;
+  isAuthenticated: IsAuthenticated;
   userId: UserId;
-  authError: string | null;
+  authError: AuthError;
 }
 export interface FriendsState {
   items: Friend[];
@@ -29,6 +41,6 @@ export interface AppState {
 }
 
 export interface Credentials {
-  email: string;
-  password: string;
+  email: Email;
+  password: Password;
 }
