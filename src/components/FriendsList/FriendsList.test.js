@@ -1,7 +1,7 @@
-import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
 import { createMockFriend } from "../../utils/mockData";
+import { renderWithRedux } from "../../utils/testing";
 import { FriendsList } from "./FriendsList";
 
 describe("FriendsList", () => {
@@ -16,7 +16,7 @@ describe("FriendsList", () => {
   beforeEach(() => {
     loadFriends = jest.fn().mockName("loadFriends");
     deleteFriend = jest.fn().mockName("deleteFriend");
-    context = render(
+    context = renderWithRedux(
       <FriendsList
         loadFriends={loadFriends}
         friends={friends}
