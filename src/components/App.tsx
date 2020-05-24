@@ -25,6 +25,28 @@ interface Props {
 export const App = ({ isAuthed, setIsAuthenticated }: Props) => {
   const classes = useStyles();
 
+  useEffect(() => {
+    const authToken = localStorage.getItem("authToken");
+    const uid = localStorage.getItem("uid");
+
+    if (authToken && uid) {
+      setIsAuthenticated!(uid);
+    }
+  }, [setIsAuthenticated]);
+
+  useEffect(() => {
+    auth.currentUser
+      ?.getIdToken()
+      .then((authToken: string) => {
+        const uid = auth.currentUser?.uid;
+        localStorage.setItem("authToken", authToken);
+        localStorage.setItem("uid", uid || "");
+      })
+      .catch((error: firebase.auth.AuthError) => {
+        console.log(error);
+      });
+  });
+
   return (
     <div className={classes.root}>
       <Navbar />
@@ -37,4 +59,8 @@ const mapStateToProps = (state: AppState) => ({
   isAuthed: state.auth.isAuthed,
 });
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = {
+  setIsAuthenticated,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
