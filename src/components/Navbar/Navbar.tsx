@@ -23,10 +23,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface Props {
-  isAuthenticated: AuthState["isAuthenticated"];
+  isAuthed: AuthState["isAuthed"];
 }
 
-export const Navbar = ({ isAuthenticated }: Props) => {
+export const Navbar = ({ isAuthed }: Props) => {
   const classes = useStyles();
 
   return (
@@ -36,7 +36,7 @@ export const Navbar = ({ isAuthenticated }: Props) => {
           <Typography variant="h6" className={classes.title}>
             Friends Reminder
           </Typography>
-          {isAuthenticated ? (
+          {isAuthed ? (
             <Signout />
           ) : (
             <>
@@ -51,7 +51,7 @@ export const Navbar = ({ isAuthenticated }: Props) => {
 };
 
 const mapStateToProps = (state: AppState) => ({
-  isAuthenticated: state.auth.isAuthenticated,
+  isAuthed: state.auth.isAuthed,
 });
 
 export default connect(mapStateToProps)(Navbar);

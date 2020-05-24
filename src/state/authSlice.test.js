@@ -25,7 +25,7 @@ describe("auth", () => {
 
       await store.dispatch(signup(credentials));
 
-      expect(store.getState().isAuthenticated).toEqual(true);
+      expect(store.getState().isAuthed).toEqual(true);
     });
 
     it("should show an unsuccessful signup", async () => {
@@ -49,7 +49,7 @@ describe("auth", () => {
 
       await store.dispatch(signup(credentials));
 
-      expect(store.getState().isAuthenticated).toEqual(undefined);
+      expect(store.getState().isAuthed).toEqual(undefined);
     });
   });
   describe("signin action", () => {
@@ -74,7 +74,7 @@ describe("auth", () => {
 
       await store.dispatch(signin(credentials));
 
-      expect(store.getState().isAuthenticated).toEqual(true);
+      expect(store.getState().isAuthed).toEqual(true);
     });
 
     it("should show an unsuccessful signin", async () => {
@@ -98,7 +98,7 @@ describe("auth", () => {
 
       await store.dispatch(signin(credentials));
 
-      expect(store.getState().isAuthenticated).toEqual(undefined);
+      expect(store.getState().isAuthed).toEqual(undefined);
     });
   });
 
@@ -122,7 +122,7 @@ describe("auth", () => {
 
       await store.dispatch(signout());
 
-      expect(store.getState().isAuthenticated).toEqual(false);
+      expect(store.getState().isAuthed).toEqual(false);
     });
   });
 });

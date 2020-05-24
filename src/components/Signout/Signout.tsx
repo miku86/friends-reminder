@@ -10,6 +10,8 @@ interface Props {
 export const Signout = ({ signout }: Props) => {
   const handleSubmit = () => {
     signout!();
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("uid");
   };
 
   return (
