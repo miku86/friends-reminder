@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Friend, NewFriend, UserId } from "../utils/types";
+import { DocId, Friend, NewFriend, UpdateFriend, UserId } from "../utils/types";
 import { AppDispatch } from "./store";
 
 export const friendsSlice = createSlice({
@@ -12,7 +12,16 @@ export const friendsSlice = createSlice({
     createFriend: (state, action: PayloadAction<Friend>) => {
       state.items = state.items.concat(action.payload);
     },
-    removeFriend: (state, action: PayloadAction<string>) => {
+    editLastTimeContacted: (state, action: PayloadAction<UpdateFriend>) => {
+      state.items = state.items.map((friend) => {
+        const updatedFriend = friend;
+        if (friend.docId === action.payload.docId) {
+          updatedFriend.lastTimeContacted = action.payload.lastTimeContacted;
+        }
+        return updatedFriend;
+      });
+    },
+    removeFriend: (state, action: PayloadAction<DocId>) => {
       state.items = state.items.filter(
         (friend) => friend.docId !== action.payload
       );
@@ -25,6 +34,7 @@ export const friendsSlice = createSlice({
 
 export const {
   createFriend,
+  editLastTimeContacted,
   removeFriend,
   storeFriends,
 } = friendsSlice.actions;
@@ -71,6 +81,21 @@ export const addFriend = (newFriend: NewFriend) => (
     })
     .catch((error: any) => {
       console.error("Error adding friend: ", error);
+    });
+};
+
+export const updateLastTimeContacted = (friend: UpdateFriend) => (
+  dispatch: AppDispatch,
+  _: any,
+  api: any
+) => {
+  api
+    .updateLastTimeContacted(friend)
+    .then(() => {
+      dispatch(editLastTimeContacted(friend));
+    })
+    .catch((error: any) => {
+      console.error("Error updating last contact time: ", error);
     });
 };
 
