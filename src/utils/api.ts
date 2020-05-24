@@ -1,6 +1,6 @@
 import { auth } from "firebase";
 import { COLLECTIONS, db } from "../config/firebase";
-import { Credentials, Friend, NewFriend, UserId } from "./types";
+import { Credentials, Friend, NewFriend, UpdateFriend, UserId } from "./types";
 
 const api = {
   loadFriends: async (userId: UserId) => {
@@ -30,6 +30,14 @@ const api = {
       docId: doc.id,
     };
     return friend;
+  },
+  updateLastTimeContacted: async ({
+    docId,
+    lastTimeContacted,
+  }: UpdateFriend) => {
+    return db.collection(COLLECTIONS.FRIENDS).doc(docId).update({
+      lastTimeContacted,
+    });
   },
   signup: async ({ email, password }: Credentials) => {
     return auth().createUserWithEmailAndPassword(email, password);
