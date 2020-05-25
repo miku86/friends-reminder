@@ -5,49 +5,77 @@ import { Credentials, Friend, NewFriend, UpdateFriend, UserId } from "./types";
 
 const api = {
   loadFriends: async (userId: UserId) => {
-    const snapshot = await db
-      .collection(COLLECTIONS.FRIENDS)
-      .where("userId", "==", userId)
-      .get();
+    try {
+      const snapshot = await db
+        .collection(COLLECTIONS.FRIENDS)
+        .where("userId", "==", userId)
+        .get();
 
-    let result = [] as Friend[];
+      let result = [] as Friend[];
 
-    snapshot.forEach((doc: firebase.firestore.DocumentData) => {
-      result.push({
-        docId: doc.id,
-        ...doc.data(),
+      snapshot.forEach((doc: firebase.firestore.DocumentData) => {
+        result.push({
+          docId: doc.id,
+          ...doc.data(),
+        });
       });
-    });
 
-    return result;
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
   },
   deleteFriend: async (docId: string) => {
-    return db.collection(COLLECTIONS.FRIENDS).doc(docId).delete();
+    try {
+      return db.collection(COLLECTIONS.FRIENDS).doc(docId).delete();
+    } catch (error) {
+      console.log(error);
+    }
   },
   addFriend: async (newFriend: NewFriend) => {
-    const doc = await db.collection(COLLECTIONS.FRIENDS).add(newFriend);
-    const friend = {
-      ...newFriend,
-      docId: doc.id,
-    };
-    return friend;
+    try {
+      const doc = await db.collection(COLLECTIONS.FRIENDS).add(newFriend);
+      const friend = {
+        ...newFriend,
+        docId: doc.id,
+      };
+      return friend;
+    } catch (error) {
+      console.log(error);
+    }
   },
   updateLastTimeContacted: async ({
     docId,
     lastTimeContacted,
   }: UpdateFriend) => {
-    return db.collection(COLLECTIONS.FRIENDS).doc(docId).update({
-      lastTimeContacted,
-    });
+    try {
+      return db.collection(COLLECTIONS.FRIENDS).doc(docId).update({
+        lastTimeContacted,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   },
   signup: async ({ email, password }: Credentials) => {
-    return firebase.auth().createUserWithEmailAndPassword(email, password);
+    try {
+      return firebase.auth().createUserWithEmailAndPassword(email, password);
+    } catch (error) {
+      console.log(error);
+    }
   },
   signin: async ({ email, password }: Credentials) => {
-    return firebase.auth().signInWithEmailAndPassword(email, password);
+    try {
+      return firebase.auth().signInWithEmailAndPassword(email, password);
+    } catch (error) {
+      console.log(error);
+    }
   },
   signout: async () => {
-    return firebase.auth().signOut();
+    try {
+      return firebase.auth().signOut();
+    } catch (error) {
+      console.log(error);
+    }
   },
 };
 
