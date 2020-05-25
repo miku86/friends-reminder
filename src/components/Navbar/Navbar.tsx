@@ -8,6 +8,7 @@ import {
 import React from "react";
 import { connect } from "react-redux";
 import { AppState, AuthState } from "../../utils/types";
+import DemoSignin from "../DemoSignin/DemoSignin";
 import Signin from "../Signin/Signin";
 import Signout from "../Signout/Signout";
 import Signup from "../Signup/Signup";
@@ -40,6 +41,7 @@ export const Navbar = ({ isAuthed }: Props) => {
             <Signout />
           ) : (
             <>
+              <DemoSignin />
               <Signup />
               <Signin />
             </>
