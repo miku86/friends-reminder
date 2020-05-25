@@ -1,4 +1,5 @@
-import { auth } from "firebase";
+import * as firebase from "firebase/app";
+import "firebase/auth";
 import { COLLECTIONS, db } from "../config/firebase";
 import { Credentials, Friend, NewFriend, UpdateFriend, UserId } from "./types";
 
@@ -40,13 +41,13 @@ const api = {
     });
   },
   signup: async ({ email, password }: Credentials) => {
-    return auth().createUserWithEmailAndPassword(email, password);
+    return firebase.auth().createUserWithEmailAndPassword(email, password);
   },
   signin: async ({ email, password }: Credentials) => {
-    return auth().signInWithEmailAndPassword(email, password);
+    return firebase.auth().signInWithEmailAndPassword(email, password);
   },
   signout: async () => {
-    return auth().signOut();
+    return firebase.auth().signOut();
   },
 };
 
