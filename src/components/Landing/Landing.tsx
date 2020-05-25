@@ -1,6 +1,6 @@
 import { Button, makeStyles, Theme, Typography } from "@material-ui/core";
 import React, { useState } from "react";
-import SignupDialog from "../SignupDialog/SignupDialog";
+import SignupDialog from "../Signup/SignupDialog/SignupDialog";
 
 const useStyles = makeStyles((theme: Theme) => ({
   content: {

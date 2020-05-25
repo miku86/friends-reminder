@@ -9,8 +9,8 @@ import {
 import { Alert } from "@material-ui/lab";
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { connect } from "react-redux";
-import { signup } from "../../state/authSlice";
-import { AppState, AuthState, Credentials } from "../../utils/types";
+import { signup } from "../../../state/authSlice";
+import { AppState, AuthState, Credentials } from "../../../utils/types";
 
 interface Props {
   authError: AuthState["authError"];
