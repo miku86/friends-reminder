@@ -1,11 +1,17 @@
 import { Button } from "@material-ui/core";
-import React, { useState } from "react";
-import SignupDialog from "../SignupDialog/SignupDialog";
+import React, { ChangeEvent, FormEvent, useState } from "react";
+import { connect } from "react-redux";
+import { signup } from "../../state/authSlice";
+import { Credentials } from "../../utils/types";
+import FormDialog from "../shared/FormDialog/FormDialog";
 
-interface Props {}
+interface Props {
+  signup?: ({ email, password }: Credentials) => void;
+}
 
-export const Signup = (props: Props) => {
+export const Signup = ({ signup }: Props) => {
   const [open, setOpen] = useState(false);
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -13,6 +19,19 @@ export const Signup = (props: Props) => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const target = event.currentTarget;
+    setCredentials((prev) => ({
+      ...prev,
+      [target.id]: target.value,
+    }));
+  };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    signup!({ email: credentials.email, password: credentials.password });
   };
 
   return (
@@ -24,9 +43,20 @@ export const Signup = (props: Props) => {
       >
         Signup
       </Button>
-      <SignupDialog open={open} handleClose={handleClose} />
+      <FormDialog
+        handleChange={handleChange}
+        handleClose={handleClose}
+        handleSubmit={handleSubmit}
+        open={open}
+        text="Signup"
+        withHint={false}
+      />
     </>
   );
 };
 
-export default Signup;
+const mapDispatchToProps = {
+  signup,
+};
+
+export default connect(null, mapDispatchToProps)(Signup);

@@ -1,24 +1,15 @@
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  TextField,
-} from "@material-ui/core";
-import { Alert } from "@material-ui/lab";
-import React, { ChangeEvent, useState } from "react";
+import { Button } from "@material-ui/core";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import { connect } from "react-redux";
 import { signin } from "../../state/authSlice";
-import { AppState, AuthState, Credentials } from "../../utils/types";
+import { Credentials } from "../../utils/types";
+import FormDialog from "../shared/FormDialog/FormDialog";
 
 interface Props {
-  authError: AuthState["authError"];
-  signin?: (credentials: Credentials) => void;
+  signin?: ({ email, password }: Credentials) => void;
 }
 
-export const Signin = ({ authError, signin }: Props) => {
+export const Signin = ({ signin }: Props) => {
   const [open, setOpen] = useState(false);
   const [credentials, setCredentials] = useState({ email: "", password: "" });
 
@@ -38,8 +29,9 @@ export const Signin = ({ authError, signin }: Props) => {
     }));
   };
 
-  const handleSubmit = () => {
-    signin!(credentials);
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    signin!({ email: credentials.email, password: credentials.password });
   };
 
   return (
@@ -51,54 +43,20 @@ export const Signin = ({ authError, signin }: Props) => {
       >
         Signin
       </Button>
-      <Dialog open={open} onClose={handleClose} aria-label="signin-modal">
-        <DialogTitle>Signin</DialogTitle>
-        <DialogContent>
-          {authError && (
-            <Alert severity="error" aria-label="signin-error">
-              {authError}
-            </Alert>
-          )}
-          <DialogContentText>Demo: demo@miku86.com / demo123</DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="email"
-            label="E-Mail"
-            type="text"
-            fullWidth
-            onChange={handleChange}
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="password"
-            label="Password"
-            type="password"
-            fullWidth
-            onChange={handleChange}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={handleSubmit}
-            color="primary"
-            aria-label="signin-submit"
-          >
-            Signin
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <FormDialog
+        handleChange={handleChange}
+        handleClose={handleClose}
+        handleSubmit={handleSubmit}
+        open={open}
+        text="Signin"
+        withHint={true}
+      />
     </>
   );
 };
-
-const mapStateToProps = (state: AppState) => ({
-  authError: state.auth.authError,
-});
 
 const mapDispatchToProps = {
   signin,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signin);
+export default connect(null, mapDispatchToProps)(Signin);
