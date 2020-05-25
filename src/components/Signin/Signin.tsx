@@ -8,7 +8,7 @@ import {
   TextField,
 } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import { connect } from "react-redux";
 import { signin } from "../../state/authSlice";
 import { AppState, AuthState, Credentials } from "../../utils/types";
@@ -38,8 +38,9 @@ export const Signin = ({ authError, signin }: Props) => {
     }));
   };
 
-  const handleSubmit = () => {
-    signin!(credentials);
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    signin!({ email: credentials.email, password: credentials.password });
   };
 
   return (
@@ -52,42 +53,42 @@ export const Signin = ({ authError, signin }: Props) => {
         Signin
       </Button>
       <Dialog open={open} onClose={handleClose} aria-label="signin-modal">
-        <DialogTitle>Signin</DialogTitle>
-        <DialogContent>
-          {authError && (
-            <Alert severity="error" aria-label="signin-error">
-              {authError}
-            </Alert>
-          )}
-          <DialogContentText>Demo: demo@miku86.com / demo123</DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="email"
-            label="E-Mail"
-            type="text"
-            fullWidth
-            onChange={handleChange}
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="password"
-            label="Password"
-            type="password"
-            fullWidth
-            onChange={handleChange}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={handleSubmit}
-            color="primary"
-            aria-label="signin-submit"
-          >
-            Signin
-          </Button>
-        </DialogActions>
+        <form onSubmit={handleSubmit}>
+          <DialogTitle>Signin</DialogTitle>
+          <DialogContent>
+            {authError && (
+              <Alert severity="error" aria-label="signin-error">
+                {authError}
+              </Alert>
+            )}
+            <DialogContentText>
+              Demo: demo@miku86.com / demo123
+            </DialogContentText>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="email"
+              label="E-Mail"
+              type="text"
+              fullWidth
+              onChange={handleChange}
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              id="password"
+              label="Password"
+              type="password"
+              fullWidth
+              onChange={handleChange}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button color="primary" aria-label="signin-submit" type="submit">
+              Signin
+            </Button>
+          </DialogActions>
+        </form>
       </Dialog>
     </>
   );

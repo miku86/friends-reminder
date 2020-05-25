@@ -7,7 +7,7 @@ import {
   TextField,
 } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import { connect } from "react-redux";
 import { signup } from "../../state/authSlice";
 import { AppState, AuthState, Credentials } from "../../utils/types";
@@ -35,47 +35,46 @@ export const SignupDialog = ({
     }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     signup!({ email: credentials.email, password: credentials.password });
   };
 
   return (
     <Dialog open={open} onClose={handleClose} aria-label="signup-modal">
-      <DialogTitle>Signup</DialogTitle>
-      <DialogContent>
-        {authError && (
-          <Alert severity="error" aria-label="signup-error">
-            {authError}
-          </Alert>
-        )}
-        <TextField
-          autoFocus
-          margin="dense"
-          id="email"
-          label="E-Mail"
-          type="text"
-          fullWidth
-          onChange={handleChange}
-        />
-        <TextField
-          autoFocus
-          margin="dense"
-          id="password"
-          label="Password"
-          type="password"
-          fullWidth
-          onChange={handleChange}
-        />
-      </DialogContent>
-      <DialogActions>
-        <Button
-          onClick={handleSubmit}
-          color="primary"
-          aria-label="signup-submit"
-        >
-          Signup
-        </Button>
-      </DialogActions>
+      <form onSubmit={handleSubmit}>
+        <DialogTitle>Signup</DialogTitle>
+        <DialogContent>
+          {authError && (
+            <Alert severity="error" aria-label="signup-error">
+              {authError}
+            </Alert>
+          )}
+          <TextField
+            autoFocus
+            margin="dense"
+            id="email"
+            label="E-Mail"
+            type="text"
+            fullWidth
+            onChange={handleChange}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="password"
+            label="Password"
+            type="password"
+            fullWidth
+            onChange={handleChange}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button color="primary" aria-label="signup-submit" type="submit">
+            Signup
+          </Button>
+        </DialogActions>
+      </form>
     </Dialog>
   );
 };
