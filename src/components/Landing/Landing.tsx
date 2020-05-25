@@ -1,6 +1,9 @@
 import { Button, makeStyles, Theme, Typography } from "@material-ui/core";
-import React, { useState } from "react";
-import SignupDialog from "../Signup/SignupDialog/SignupDialog";
+import React, { ChangeEvent, FormEvent, useState } from "react";
+import { connect } from "react-redux";
+import { signup } from "../../state/authSlice";
+import { Credentials } from "../../utils/types";
+import FormDialog from "../shared/FormDialog/FormDialog";
 
 const useStyles = makeStyles((theme: Theme) => ({
   content: {
@@ -31,11 +34,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-interface Props {}
+interface Props {
+  signup?: ({ email, password }: Credentials) => void;
+}
 
-const Landing = (props: Props) => {
+const Landing = ({ signup }: Props) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -43,6 +49,19 @@ const Landing = (props: Props) => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const target = event.currentTarget;
+    setCredentials((prev) => ({
+      ...prev,
+      [target.id]: target.value,
+    }));
+  };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    signup!({ email: credentials.email, password: credentials.password });
   };
 
   return (
@@ -57,6 +76,7 @@ const Landing = (props: Props) => {
           See quickly when you last contacted your friends. Never forget and
           lose a friend again.
         </Typography>
+
         <Button
           className={classes.cta}
           variant="contained"
@@ -65,10 +85,22 @@ const Landing = (props: Props) => {
         >
           Signup
         </Button>
-        <SignupDialog open={open} handleClose={handleClose} />
+
+        <FormDialog
+          handleChange={handleChange}
+          handleClose={handleClose}
+          handleSubmit={handleSubmit}
+          open={open}
+          text="Signup"
+          withHint={false}
+        />
       </div>
     </div>
   );
 };
 
-export default Landing;
+const mapDispatchToProps = {
+  signup,
+};
+
+export default connect(null, mapDispatchToProps)(Landing);

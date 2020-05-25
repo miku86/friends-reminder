@@ -12,6 +12,6 @@ describe("Signup", () => {
   it("should open a modal when clicking the signup button", async () => {
     const { getByLabelText } = renderWithRedux(<Signup />);
     await userEvent.click(getByLabelText("signup-button"));
-    expect(getByLabelText("signup-modal")).toBeInTheDocument();
+    expect(getByLabelText("modal")).toBeInTheDocument();
   });
 });

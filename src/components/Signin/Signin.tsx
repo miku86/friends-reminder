@@ -1,11 +1,17 @@
 import { Button } from "@material-ui/core";
-import React, { useState } from "react";
-import SigninDialog from "./SigninDialog/SigninDialog";
+import React, { ChangeEvent, FormEvent, useState } from "react";
+import { connect } from "react-redux";
+import { signin } from "../../state/authSlice";
+import { Credentials } from "../../utils/types";
+import FormDialog from "../shared/FormDialog/FormDialog";
 
-interface Props {}
+interface Props {
+  signin?: ({ email, password }: Credentials) => void;
+}
 
-export const Signin = (props: Props) => {
+export const Signin = ({ signin }: Props) => {
   const [open, setOpen] = useState(false);
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -13,6 +19,19 @@ export const Signin = (props: Props) => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const target = event.currentTarget;
+    setCredentials((prev) => ({
+      ...prev,
+      [target.id]: target.value,
+    }));
+  };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    signin!({ email: credentials.email, password: credentials.password });
   };
 
   return (
@@ -24,9 +43,20 @@ export const Signin = (props: Props) => {
       >
         Signin
       </Button>
-      <SigninDialog open={open} handleClose={handleClose} />
+      <FormDialog
+        handleChange={handleChange}
+        handleClose={handleClose}
+        handleSubmit={handleSubmit}
+        open={open}
+        text="Signin"
+        withHint={true}
+      />
     </>
   );
 };
 
-export default Signin;
+const mapDispatchToProps = {
+  signin,
+};
+
+export default connect(null, mapDispatchToProps)(Signin);
