@@ -1,6 +1,6 @@
 import { Button } from "@material-ui/core";
 import React, { useState } from "react";
-import SigninDialog from "../SigninDialog/SigninDialog";
+import SigninDialog from "./SigninDialog/SigninDialog";
 
 interface Props {}
 

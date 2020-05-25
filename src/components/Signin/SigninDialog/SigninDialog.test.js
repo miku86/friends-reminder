@@ -1,8 +1,8 @@
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
-import { createMockCredentials } from "../../utils/mockData";
-import { SigninDialog } from "../SigninDialog/SigninDialog";
+import { createMockCredentials } from "../../../utils/mockData";
+import { SigninDialog } from "./SigninDialog";
 
 describe("SigninDialog", () => {
   let signin;
